@@ -1,6 +1,14 @@
 {
-	"extends": "standard",
+  "extends":[
+    "standard",
+    "plugin:vue/essential"
+  ],
   "rules": {
     "no-new": 0
-  }
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "plugins": ["vue","html"]
 }
