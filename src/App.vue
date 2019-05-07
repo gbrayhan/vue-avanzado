@@ -1,12 +1,11 @@
 <template lang="pug">
   #app
-    img(src= "./assets/logo.png")
-    h1 {{ msg }}
-    p {{ 'Hola ' + 'Mundo'}}
-    p {{ person.name }}
-    p {{ person.name.toUpperCase() }}
-    p {{ JSON.stringify(person) }}
-    p {{ condicion ? 'Es Verdadero' : 'Es Falso' }}
+    p(v-show="showValue") {{ value }}
+    p(v-if="showValue") {{ value }}
+    p(v-else-if="condicion") {{ "recurso alterno" }}
+    p(v-else) {{ 'recurso no disponible' }}
+    ul
+      li(v-for="item in items") {{ item * 2 }}
 </template>
 
 <script>
@@ -18,7 +17,10 @@ export default {
       person: {
         name: 'Alex'
       },
-      condicion: false
+      condicion: true,
+      showValue: false,
+      value: 'Elemento a Mostrar',
+      items: [1, 2, 3, 4, 5, 6, 7, 5, 4, 3, 2, 3]
     }
   }
 }
