@@ -6,8 +6,10 @@
     p(v-else) {{ 'recurso no disponible' }}
     ul
       li(v-for="item in items") {{ item * 2 }}
+    input(v-model="name")
+    p {{ name }}
+    a( v-bind:href="url" ) direccion web
 </template>
-
 <script>
 export default {
   name: 'app',
@@ -20,12 +22,13 @@ export default {
       condicion: true,
       showValue: false,
       value: 'Elemento a Mostrar',
-      items: [1, 2, 3, 4, 5, 6, 7, 5, 4, 3, 2, 3]
+      items: [1, 2, 3, 4, 5, 6, 7, 5, 4, 3, 2, 3],
+      name: '',
+      url: 'https://www.google.com'
     }
   }
 }
 </script>
-
 <style lang="scss">
   @import "./scss/main.scss";
 </style>
