@@ -12,7 +12,7 @@
       <div class="container results">
         <div class="colums">
           <div class="column items" v-for="(track, index ) in tracks" :key="index">
-            {{track.name}} - {{track.artist}}
+            {{ track.name }} - {{ track.artists[0].name }}
           </div>
           <p class="help is-success">Resultados encontrados: {{searchMesssage}}</p>
         </div>
@@ -22,11 +22,13 @@
 </template>
 
 <script>
-const tracks = [
-  { name: 'muchacha', artist: 'Luis albeto' },
-  { name: 'vivir la vida', artist: 'Marck antony' },
-  { name: 'Platzi', artist: 'Nacho' }
-]
+import trackService from './service/track'
+
+// const tracks = [
+//   { name: 'muchacha', artist: 'Luis albeto' },
+//   { name: 'vivir la vida', artist: 'Marck antony' },
+//   { name: 'Platzi', artist: 'Nacho' }
+// ]
 
 export default {
   name: 'app',
@@ -38,7 +40,13 @@ export default {
   },
   methods: {
     search () {
-      this.tracks = tracks
+      if (!this.searchQuery) {
+        return
+      }
+      trackService.search(this.searchQuery)
+        .then(res => {
+          this.tracks = res.tracks.items
+        })
     }
   },
   computed: {
@@ -50,15 +58,15 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'scss/main.scss';
+  @import 'scss/main.scss';
 
-#app {
-  .custom {
-    margin-top: 20px;
-  }
+  #app {
+    .custom {
+      margin-top: 20px;
+    }
 
-  .items {
-    padding: 5px;
+    .items {
+      padding: 5px;
+    }
   }
-}
 </style>
